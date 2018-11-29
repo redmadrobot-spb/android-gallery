@@ -1,1 +1,1 @@
-include ':gallery', ':photoview', ':sample'
+include ':gallery', ':sample'

@@ -1,8 +1,7 @@
 package com.redmadrobot.sample
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v7.widget.GridLayoutManager
+import androidx.appcompat.app.AppCompatActivity
 import com.redmadrobot.gallery.entity.Media
 import com.redmadrobot.gallery.entity.MediaType
 import com.redmadrobot.gallery.ui.GalleryFragment

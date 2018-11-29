@@ -2,12 +2,12 @@ package com.redmadrobot.gallery.ui
 
 import android.content.pm.ActivityInfo
 import android.os.Bundle
-import android.support.v4.app.DialogFragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.core.view.isVisible
+import androidx.fragment.app.DialogFragment
 import com.redmadrobot.gallery.R
 import com.redmadrobot.gallery.entity.Media
 import com.redmadrobot.gallery.util.argument
