@@ -2,6 +2,7 @@
 Simple and standard android gallery that allows you to view media content fullscreen one by one including video player for videos.
 Android gallery includes all usual gestures like swipe to dismiss, pinch to zoom, quick scaling by double tap and other. 
 
+![](android-gallery.gif)
 ## Install
 Under constructuion
 ## Usage
