@@ -3,11 +3,11 @@ package com.redmadrobot.gallery.ui
 import android.content.Context
 import android.graphics.Color
 import android.net.Uri
-import android.support.v4.view.PagerAdapter
 import android.util.SparseArray
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.util.valueIterator
+import androidx.viewpager.widget.PagerAdapter
 import com.bumptech.glide.Glide
 import com.github.chrisbanes.photoview.PhotoView
 import com.google.android.exoplayer2.ExoPlayer

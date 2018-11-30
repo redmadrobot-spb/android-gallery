@@ -1,13 +1,13 @@
 package com.redmadrobot.gallery.ui
 
-import android.support.v4.view.ViewPager
+import androidx.viewpager.widget.ViewPager
 import com.redmadrobot.gallery.entity.Media
 
 internal class MediaViewController(
-    private val viewPager: ViewPager,
-    private val onCurrentItemChangeListener: (Int) -> Unit,
-    private val onPlayerControllerVisibilityListener: (Boolean) -> Unit,
-    private val onImageZoomListener: (isZoomed: Boolean) -> Unit
+        private val viewPager: ViewPager,
+        private val onCurrentItemChangeListener: (Int) -> Unit,
+        private val onPlayerControllerVisibilityListener: (Boolean) -> Unit,
+        private val onImageZoomListener: (isZoomed: Boolean) -> Unit
 ) {
 
     private lateinit var adapter: MediaPagerAdapter
