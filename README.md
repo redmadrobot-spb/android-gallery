@@ -38,6 +38,7 @@ For more information just look throw the sample.
 * [Glide](https://github.com/bumptech/glide) for media content loading
 
 ## License
+```
 MIT License
 
 Copyright (c) 2018 Redmadrobot
@@ -59,3 +60,4 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+```
