@@ -15,10 +15,10 @@ internal class MediaViewController(
     fun bind(listOfMedia: List<Media>) {
 
         adapter = MediaPagerAdapter(
-            listOfMedia,
-            viewPager.context,
-            onPlayerControllerVisibilityListener,
-            onImageZoomListener
+                listOfMedia,
+                viewPager.context,
+                onPlayerControllerVisibilityListener,
+                onImageZoomListener
         )
         viewPager.adapter = adapter
 
@@ -33,9 +33,9 @@ internal class MediaViewController(
             }
 
             override fun onPageScrolled(
-                position: Int,
-                positionOffset: Float,
-                positionOffsetPixels: Int
+                    position: Int,
+                    positionOffset: Float,
+                    positionOffsetPixels: Int
             ) {
             }
 

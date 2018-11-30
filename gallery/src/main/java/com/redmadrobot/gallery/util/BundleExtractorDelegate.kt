@@ -6,21 +6,21 @@ import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
 
 internal inline fun <reified T> argument(
-    key: String,
-    defaultValue: T? = null
+        key: String,
+        defaultValue: T? = null
 ): ReadWriteProperty<Fragment, T> =
-    BundleExtractorDelegate { thisRef ->
-        extractFromBundle(
-            bundle = thisRef.arguments,
-            key = key,
-            defaultValue = defaultValue
-        )
-    }
+        BundleExtractorDelegate { thisRef ->
+            extractFromBundle(
+                    bundle = thisRef.arguments,
+                    key = key,
+                    defaultValue = defaultValue
+            )
+        }
 
 internal inline fun <reified T> extractFromBundle(
-    bundle: Bundle?,
-    key: String,
-    defaultValue: T? = null
+        bundle: Bundle?,
+        key: String,
+        defaultValue: T? = null
 ): T {
     val result = bundle?.get(key) ?: defaultValue
     if (result != null && result !is T) {

@@ -10,9 +10,9 @@ import android.widget.FrameLayout
  * Allow listen vertical drag motions.
  */
 internal class VerticalDragLayout @JvmOverloads constructor(
-    context: Context,
-    attrs: AttributeSet? = null,
-    defStyleAttr: Int = 0
+        context: Context,
+        attrs: AttributeSet? = null,
+        defStyleAttr: Int = 0
 ) : FrameLayout(context, attrs, defStyleAttr) {
 
     var draggingIsEnabled = true
@@ -69,9 +69,9 @@ internal class VerticalDragLayout @JvmOverloads constructor(
             }
             MotionEvent.ACTION_MOVE -> {
                 if (draggingIsEnabled
-                    && isDetectedVerticalMove == null
-                    && ev.pointerCount == 1
-                    && Math.abs(startY - ev.y) > touchSlop
+                        && isDetectedVerticalMove == null
+                        && ev.pointerCount == 1
+                        && Math.abs(startY - ev.y) > touchSlop
                 ) {
                     val direction = getDirection(ev, startX, startY)
                     isDetectedVerticalMove = (direction == Direction.UP || direction == Direction.DOWN)
@@ -84,8 +84,8 @@ internal class VerticalDragLayout @JvmOverloads constructor(
 
     override fun onInterceptTouchEvent(ev: MotionEvent): Boolean {
         return ev.pointerCount == 1
-            && ev.action == MotionEvent.ACTION_MOVE
-            && isDetectedVerticalMove == true
+                && ev.action == MotionEvent.ACTION_MOVE
+                && isDetectedVerticalMove == true
     }
 
     override fun onTouchEvent(ev: MotionEvent): Boolean {
@@ -108,7 +108,7 @@ internal class VerticalDragLayout @JvmOverloads constructor(
     }
 
     private fun getDirection(ev: MotionEvent, x: Float, y: Float) =
-        Direction[getAngle(x, y, ev.x, ev.y)]
+            Direction[getAngle(x, y, ev.x, ev.y)]
 
     private fun getAngle(x1: Float, y1: Float, x2: Float, y2: Float): Double {
         val rad = Math.atan2((y1 - y2).toDouble(), (x2 - x1).toDouble()) + Math.PI
@@ -133,7 +133,7 @@ internal class VerticalDragLayout @JvmOverloads constructor(
             }
 
             private fun inRange(angle: Double, init: Float, end: Float) =
-                angle >= init && angle < end
+                    angle >= init && angle < end
         }
     }
 }

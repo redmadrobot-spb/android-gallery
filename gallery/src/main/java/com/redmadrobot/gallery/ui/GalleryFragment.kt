@@ -25,17 +25,17 @@ class GalleryFragment : DialogFragment() {
         private const val ARG_FORCE_ROTATION = "arg_force_rotation"
 
         fun create(
-            list: ArrayList<Media>,
-            initiallyCheckedItemIndex: Int,
-            forceEnableAutoRotation: Boolean = false
+                list: ArrayList<Media>,
+                initiallyCheckedItemIndex: Int,
+                forceEnableAutoRotation: Boolean = false
         ): GalleryFragment =
-            GalleryFragment().apply {
-                arguments = Bundle().apply {
-                    putSerializable(ARG_LIST_OF_MEDIA, list)
-                    putInt(ARG_INITIALLY_CHECKED_ITEM_INDEX, initiallyCheckedItemIndex)
-                    putBoolean(ARG_FORCE_ROTATION, forceEnableAutoRotation)
+                GalleryFragment().apply {
+                    arguments = Bundle().apply {
+                        putSerializable(ARG_LIST_OF_MEDIA, list)
+                        putInt(ARG_INITIALLY_CHECKED_ITEM_INDEX, initiallyCheckedItemIndex)
+                        putBoolean(ARG_FORCE_ROTATION, forceEnableAutoRotation)
+                    }
                 }
-            }
     }
 
     private val listOfMedia: ArrayList<Media> by argument(ARG_LIST_OF_MEDIA)
@@ -55,11 +55,11 @@ class GalleryFragment : DialogFragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? =
-        inflater.inflate(R.layout.fragment_gallery, container, false)
+            inflater.inflate(R.layout.fragment_gallery, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -81,12 +81,12 @@ class GalleryFragment : DialogFragment() {
         lastCheckedItemIndex = savedInstanceState?.getInt(STATE_LAST_CHECKED_ITEM_INDEX) ?: initiallyCheckedItemIndex
 
         mediaViewController = MediaViewController(
-            viewPager = viewPager,
-            onCurrentItemChangeListener = { index ->
-                lastCheckedItemIndex = index
-            },
-            onPlayerControllerVisibilityListener = {},
-            onImageZoomListener = { isZoomed -> dragLayout.draggingIsEnabled = !isZoomed }
+                viewPager = viewPager,
+                onCurrentItemChangeListener = { index ->
+                    lastCheckedItemIndex = index
+                },
+                onPlayerControllerVisibilityListener = {},
+                onImageZoomListener = { isZoomed -> dragLayout.draggingIsEnabled = !isZoomed }
         ).apply {
             bind(listOfMedia)
             setCurrentItemIndex(lastCheckedItemIndex)
