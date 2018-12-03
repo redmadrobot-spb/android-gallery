@@ -11,9 +11,9 @@ import com.google.android.exoplayer2.ui.PlayerView
  * Subclass of [PlayerView] which overrides controller show/hide touch events.
  */
 internal class ExoPlayerView @JvmOverloads constructor(
-    context: Context,
-    attrs: AttributeSet? = null,
-    defStyleAttr: Int = 0
+        context: Context,
+        attrs: AttributeSet? = null,
+        defStyleAttr: Int = 0
 ) : PlayerView(context, attrs, defStyleAttr) {
 
     private val gestureDetector = GestureDetector(context, object : GestureDetector.SimpleOnGestureListener() {

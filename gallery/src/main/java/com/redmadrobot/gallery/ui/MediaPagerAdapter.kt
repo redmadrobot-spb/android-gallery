@@ -24,17 +24,17 @@ import com.redmadrobot.gallery.ui.custom.ExoPlayerView
 import java.util.*
 
 internal class MediaPagerAdapter(
-    private val listOfMedia: List<Media>,
-    context: Context,
-    onPlayerControllerVisibilityListener: (Boolean) -> Unit,
-    onImageZoomListener: (isZoomed: Boolean) -> Unit
+        private val listOfMedia: List<Media>,
+        context: Context,
+        onPlayerControllerVisibilityListener: (Boolean) -> Unit,
+        onImageZoomListener: (isZoomed: Boolean) -> Unit
 ) : PagerAdapter() {
 
     private val mediaPagePool = MediaPagePool(
-        context,
-        ExoPlayerFactory(context),
-        onPlayerControllerVisibilityListener,
-        onImageZoomListener
+            context,
+            ExoPlayerFactory(context),
+            onPlayerControllerVisibilityListener,
+            onImageZoomListener
     )
     private val mediaPagesInUse = SparseArray<MediaPage>()
 
@@ -111,9 +111,9 @@ private sealed class MediaPage {
 }
 
 private class VideoPage(
-    context: Context,
-    private val exoPlayerWrapper: ExoPlayerWrapper,
-    onPlayerControllerVisibilityListener: (Boolean) -> Unit
+        context: Context,
+        private val exoPlayerWrapper: ExoPlayerWrapper,
+        onPlayerControllerVisibilityListener: (Boolean) -> Unit
 ) : MediaPage() {
 
     override val view: PlayerView = ExoPlayerView(context).apply {
@@ -145,8 +145,8 @@ private class VideoPage(
 }
 
 private class ImagePage(
-    context: Context,
-    private val onImageZoomListener: (isZoomed: Boolean) -> Unit
+        context: Context,
+        private val onImageZoomListener: (isZoomed: Boolean) -> Unit
 ) : MediaPage() {
 
     override val view: PhotoView = PhotoView(context).apply {
@@ -174,26 +174,26 @@ private class ImagePage(
  * This class is a base for page view (players and other objects) recycling mechanism.
  */
 private class MediaPagePool(
-    private val context: Context,
-    private val playerFactory: ExoPlayerFactory,
-    private val onPlayerControllerVisibilityListener: (Boolean) -> Unit,
-    private val onImageZoomListener: (isZoomed: Boolean) -> Unit
+        private val context: Context,
+        private val playerFactory: ExoPlayerFactory,
+        private val onPlayerControllerVisibilityListener: (Boolean) -> Unit,
+        private val onImageZoomListener: (isZoomed: Boolean) -> Unit
 ) {
 
     private val videoPagePool: Queue<VideoPage> = LinkedList<VideoPage>()
     private val imagePagePool: Queue<ImagePage> = LinkedList<ImagePage>()
 
     fun getVideoPage(): VideoPage =
-        videoPagePool.poll()
-            ?: VideoPage(
-                context,
-                playerFactory.createPlayer(),
-                onPlayerControllerVisibilityListener
-            )
+            videoPagePool.poll()
+                    ?: VideoPage(
+                            context,
+                            playerFactory.createPlayer(),
+                            onPlayerControllerVisibilityListener
+                    )
 
     fun getImagePage(): ImagePage =
-        imagePagePool.poll()
-            ?: ImagePage(context, onImageZoomListener)
+            imagePagePool.poll()
+                    ?: ImagePage(context, onImageZoomListener)
 
     fun releaseMediaPage(mediaPage: MediaPage) = when (mediaPage) {
         is VideoPage -> {
@@ -220,8 +220,8 @@ private class MediaPagePool(
  * Do not expose reference to the player to not allow abuse of its usage, hence to lower code entanglement.
  */
 private class ExoPlayerWrapper(
-    private val exoPlayer: ExoPlayer,
-    private val mediaSourceFactory: ExtractorMediaSource.Factory
+        private val exoPlayer: ExoPlayer,
+        private val mediaSourceFactory: ExtractorMediaSource.Factory
 ) {
 
     fun attachTo(playerView: PlayerView) {
@@ -250,19 +250,19 @@ private class ExoPlayerFactory(private val context: Context) {
     fun createPlayer(): ExoPlayerWrapper {
         val bandwidthMeter = DefaultBandwidthMeter()
         return ExoPlayerWrapper(
-            com.google.android.exoplayer2.ExoPlayerFactory.newSimpleInstance(
-                context,
-                DefaultTrackSelector(
-                    AdaptiveTrackSelection.Factory(bandwidthMeter)
+                com.google.android.exoplayer2.ExoPlayerFactory.newSimpleInstance(
+                        context,
+                        DefaultTrackSelector(
+                                AdaptiveTrackSelection.Factory(bandwidthMeter)
+                        )
+                ),
+                ExtractorMediaSource.Factory(
+                        DefaultDataSourceFactory(
+                                context,
+                                userAgent,
+                                bandwidthMeter
+                        )
                 )
-            ),
-            ExtractorMediaSource.Factory(
-                DefaultDataSourceFactory(
-                    context,
-                    userAgent,
-                    bandwidthMeter
-                )
-            )
         )
     }
 }

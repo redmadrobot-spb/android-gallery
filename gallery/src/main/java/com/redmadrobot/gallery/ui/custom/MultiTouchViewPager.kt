@@ -10,8 +10,8 @@ import androidx.viewpager.widget.ViewPager
  * This ViewPager copied from https://github.com/stfalcon-studio/FrescoImageViewer
  */
 internal class MultiTouchViewPager @JvmOverloads constructor(
-    context: Context,
-    attrs: AttributeSet? = null
+        context: Context,
+        attrs: AttributeSet? = null
 ) : ViewPager(context, attrs) {
 
     private var isDisallowIntercept = true
