@@ -35,9 +35,6 @@ def pomConfig = {
     }
 
     developers {
-        developer {
-//            developer info here
-        }
     }
 
     scm {
@@ -59,7 +56,6 @@ publishing {
             pom.withXml {
                 def root = asNode()
                 def dependenciesNode = root.appendNode('dependencies')
-
                 configurations.implementation.allDependencies.each {
                     if (it.name != 'unspecified') {
                         def dependencyNode = dependenciesNode.appendNode('dependency')
