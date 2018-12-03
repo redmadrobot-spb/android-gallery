@@ -1,3 +1,8 @@
+ext {
+    gitUrl = "https://github.com/redmadrobot-spb/android-gallery.git"
+    projectName = 'android-gallery'
+}
+
 Properties properties = new Properties()
 properties.load(project.rootProject.file('local.properties').newDataInputStream())
 
@@ -7,10 +12,10 @@ bintray {
     publications = ['GalleryPublication']
     pkg {
         repo = 'android-maven'
-        name = 'android-gallery'
+        name = projectName
         userOrg = 'rmrspb'
         licenses = ['MIT']
-        vcsUrl = 'https://github.com/redmadrobot-spb/android-gallery.git'
+        vcsUrl = gitUrl
 
         version {
             name = '1.0.0'
@@ -36,7 +41,7 @@ def pomConfig = {
     }
 
     scm {
-        url "https://github.com/redmadrobot-spb/android-gallery.git"
+        url gitUrl
     }
 }
 
@@ -44,7 +49,7 @@ publishing {
     publications {
         GalleryPublication(MavenPublication) {
             groupId 'com.redmadrobot.gallery'
-            artifactId 'android-gallery'
+            artifactId projectName
             version '1.0.0'
 
             artifact("$buildDir/outputs/aar/gallery-release.aar")
