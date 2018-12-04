@@ -3,8 +3,22 @@ Simple and standard android gallery that allows you to view media content fullsc
 Android gallery includes all usual gestures like swipe to dismiss, pinch to zoom, quick scaling by double tap and other. 
 
 ![](android-gallery.gif)
+## Requirements
+For proper work you need AndroidX in your project. If you are still using support library, use this [deprecated version of android-gallery](https://github.com/redmadrobot-spb/android-gallery-old).
 ## Install
-Under constructuion
+Add this in your root build.gradle file: 
+```groovy
+allprojects {
+	repositories {
+        maven { url "https://jitpack.io" }
+    }
+}
+```
+
+After that add library to your module:
+```groovy
+implementation 'com.redmadrobot.gallery:android-gallery:latest.version.here'
+```
 ## Usage
 All you need to create list of your media content is URL of each of image/video. 
 Just create list of `Media`:
