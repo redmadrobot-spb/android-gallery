@@ -8,7 +8,7 @@ Under constructuion
 ## Usage
 All you need to create list of your media content is URL of each of image/video. 
 Just create list of `Media`:
-```
+```kotlin
 fun createGallery() {
   val listOfMedia = arrayListOf(
             Media(
@@ -25,7 +25,7 @@ fun createGallery() {
 ```  
 Pass created list to `GalleryFragment` with the position of image you want to view. 
 After that you can show fragment by passing `FragmentManager` and fragment tag to `show` method:
-```
+```kotlin
 fun onImageClick(position: Int) {
   GalleryFragment
               .create(listOfMedia, position)
