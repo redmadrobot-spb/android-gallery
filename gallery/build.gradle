@@ -1,11 +1,7 @@
-plugins {
-    id "com.jfrog.bintray" version "1.8.4"
-}
-
+apply plugin: 'maven-publish'
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'maven-publish'
 
 android {
 
@@ -25,48 +21,14 @@ android {
         }
     }
 }
+//We need to place this apply below android section because publishing.gradle needs compileSdkVersion
+apply from: 'publishing.gradle'
 
 ext {
     exoPlayerVersion = "2.8.3"
     libraryVersion = '1.0.0'
     publishedGroupId = 'com.redmadrobot.gallery'
     artifact = 'android-gallery'
-}
-
-Properties properties = new Properties()
-properties.load(project.rootProject.file('local.properties').newDataInputStream())
-
-bintray {
-    user = properties.getProperty("bintrayUser")
-    key = properties.getProperty("bintrayApiKey")
-    pkg {
-        repo = 'android-maven'
-        name = 'android-galery'
-        licenses = ['MIT']
-        vcsUrl = 'https://github.com/redmadrobot-spb/android-gallery.git'
-
-        version {
-            name = libraryVersion
-            vcsTag = libraryVersion
-        }
-    }
-}
-
-task sourceJar(type: Jar) {
-    from android.sourceSets.main.java.srcDirs
-    classifier 'sources'
-}
-
-publishing {
-    publications {
-        publishAndroidGallery(MavenPublication) {
-            groupId publishedGroupId
-            artifactId artifact
-            version libraryVersion
-            artifact(sourceJar)
-            artifact("$buildDir/outputs/aar/gallery-release.aar")
-        }
-    }
 }
 
 dependencies {

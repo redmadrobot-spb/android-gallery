@@ -1,0 +1,91 @@
+apply plugin: 'com.jfrog.bintray'
+
+ext {
+    gitUrl = "https://github.com/redmadrobot-spb/android-gallery.git"
+    projectName = 'android-gallery'
+}
+
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+bintray {
+    user = properties.getProperty("bintrayUser")
+    key = properties.getProperty("bintrayApiKey")
+    publications = ['GalleryPublication']
+    pkg {
+        repo = 'android-maven'
+        name = projectName
+        userOrg = 'rmrspb'
+        licenses = ['MIT']
+        vcsUrl = gitUrl
+
+        version {
+            name = '1.0.0'
+        }
+    }
+}
+
+//pomConfig for publishing in maven central
+
+def pomConfig = {
+    licenses {
+        license {
+            name "MIT license"
+            url "http://www.opensource.org/licenses/mit-license.php"
+            distribution "repo"
+        }
+    }
+
+    developers {
+    }
+
+    scm {
+        url gitUrl
+    }
+}
+
+publishing {
+    publications {
+        GalleryPublication(MavenPublication) {
+            groupId 'com.redmadrobot.gallery'
+            artifactId projectName
+            version '1.0.0'
+
+            artifact("$buildDir/outputs/aar/gallery-release.aar")
+            artifact sourcesJar
+            artifact javadocJar
+
+            pom.withXml {
+                def root = asNode()
+                def dependenciesNode = root.appendNode('dependencies')
+                configurations.implementation.allDependencies.each {
+                    if (it.name != 'unspecified') {
+                        def dependencyNode = dependenciesNode.appendNode('dependency')
+                        dependencyNode.appendNode('groupId', it.group)
+                        dependencyNode.appendNode('artifactId', it.name)
+                        dependencyNode.appendNode('version', it.version)
+                    }
+                }
+                root.children().first() + pomConfig
+            }
+        }
+    }
+}
+
+// Tasks for sources and javadocs jars
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+task javadoc(type: Javadoc) {
+    source = android.sourceSets.main.java.sourceFiles
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+    classpath += configurations.compile
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
