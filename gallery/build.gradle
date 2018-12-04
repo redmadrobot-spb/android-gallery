@@ -21,7 +21,7 @@ android {
         }
     }
 }
-
+//We need to place this apply below android section because publishing.gradle needs compileSdkVersion
 apply from: 'publishing.gradle'
 
 ext {
