@@ -1,3 +1,4 @@
+[![Version](https://api.bintray.com/packages/rmrspb/android-maven/android-gallery/images/download.svg)](https://bintray.com/rmrspb/android-maven/android-gallery/_latestVersion)
 # Android-gallery
 Simple and standard android gallery that allows you to view media content fullscreen one by one including video player for videos.
 Android gallery includes all usual gestures like swipe to dismiss, pinch to zoom, quick scaling by double tap and other. 
