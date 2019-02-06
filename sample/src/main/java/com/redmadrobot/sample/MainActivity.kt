@@ -4,8 +4,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.redmadrobot.gallery.entity.Media
 import com.redmadrobot.gallery.entity.MediaType
-import com.redmadrobot.gallery.ui.GalleryFragment
-import com.redmadrobot.gallery.ui.GalleryFragment.Companion.applyGalleryParams
+import com.redmadrobot.gallery.ui.GalleryDialogFragment
+import com.redmadrobot.gallery.ui.GalleryDialogFragment.Companion.applyGalleryParams
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
                             .show(supportFragmentManager, "fragment_tag_custom_gallery")
                 }
                 else -> { position: Int ->
-                    GalleryFragment()
+                    GalleryDialogFragment()
                             .applyGalleryParams(
                                     media = listOfMedia,
                                     position = position,

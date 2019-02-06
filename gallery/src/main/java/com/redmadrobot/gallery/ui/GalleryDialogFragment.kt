@@ -18,7 +18,7 @@ import com.redmadrobot.gallery.entity.Media
 import com.redmadrobot.gallery.util.argument
 import kotlin.math.min
 
-open class GalleryFragment : DialogFragment() {
+open class GalleryDialogFragment : DialogFragment() {
 
     private val listOfMedia: ArrayList<Media> by argument(ARG_LIST_OF_MEDIA)
     private val position: Int by argument(ARG_INITIALLY_CHECKED_ITEM_INDEX)
@@ -146,7 +146,7 @@ open class GalleryFragment : DialogFragment() {
 
         @JvmOverloads
         @JvmStatic
-        fun <T : GalleryFragment> T.applyGalleryParams(
+        fun <T : GalleryDialogFragment> T.applyGalleryParams(
                 media: ArrayList<Media>,
                 position: Int,
                 isRotationEnabled: Boolean = false,

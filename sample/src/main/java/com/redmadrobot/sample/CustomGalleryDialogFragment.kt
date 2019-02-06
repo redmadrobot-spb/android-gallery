@@ -4,10 +4,10 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.redmadrobot.gallery.entity.Media
-import com.redmadrobot.gallery.ui.GalleryFragment
+import com.redmadrobot.gallery.ui.GalleryDialogFragment
 import kotlinx.android.synthetic.main.dialog_fragment_custom_gallery.*
 
-class CustomGalleryDialogFragment : GalleryFragment() {
+class CustomGalleryDialogFragment : GalleryDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

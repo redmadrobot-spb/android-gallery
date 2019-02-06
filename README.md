@@ -39,11 +39,11 @@ fun createGallery() {
             ))
 }
 ```  
-Pass created list to `GalleryFragment` with the position of image you want to view. 
+Pass created list to `GalleryDialogFragment` with the position of image you want to view. 
 After that you can show fragment by passing `FragmentManager` and fragment tag to `show` method:
 ```kotlin
 fun onImageClick(position: Int) {
-  GalleryFragment()
+  GalleryDialogFragment()
               .applyGalleryParams(
                   media = listOfMedia,
                   position = position,
