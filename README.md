@@ -43,9 +43,13 @@ Pass created list to `GalleryFragment` with the position of image you want to vi
 After that you can show fragment by passing `FragmentManager` and fragment tag to `show` method:
 ```kotlin
 fun onImageClick(position: Int) {
-  GalleryFragment
-              .create(listOfMedia, position)
-              .show(supportFragmentManager, "fragment_tag_gallery")
+  GalleryFragment()
+              .applyGalleryParams(
+                  media = listOfMedia,
+                  position = position,
+                  isRotationEnabled = true
+              )
+                  .show(supportFragmentManager, "fragment_tag_gallery")
 }
 ```
 For more information just look throw the sample.

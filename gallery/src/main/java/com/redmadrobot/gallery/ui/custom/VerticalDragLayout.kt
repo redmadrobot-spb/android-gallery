@@ -5,6 +5,7 @@ import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.ViewConfiguration
 import android.widget.FrameLayout
+import com.redmadrobot.gallery.ui.Draggable
 
 /**
  * Allow listen vertical drag motions.
@@ -13,9 +14,9 @@ internal class VerticalDragLayout @JvmOverloads constructor(
         context: Context,
         attrs: AttributeSet? = null,
         defStyleAttr: Int = 0
-) : FrameLayout(context, attrs, defStyleAttr) {
+) : FrameLayout(context, attrs, defStyleAttr), Draggable {
 
-    var draggingIsEnabled = true
+    override var isDraggingEnabled = true
         set(value) {
             field = value
             reset()
@@ -34,11 +35,11 @@ internal class VerticalDragLayout @JvmOverloads constructor(
     private var onDragListener: (dy: Float) -> Unit = {}
     private var onReleaseDragListener: (dy: Float) -> Unit = {}
 
-    fun setOnDragListener(listener: (dy: Float) -> Unit) {
+    override fun setOnDragListener(listener: (dy: Float) -> Unit) {
         onDragListener = listener
     }
 
-    fun setOnReleaseDragListener(listener: (dy: Float) -> Unit) {
+    override fun setOnReleaseDragListener(listener: (dy: Float) -> Unit) {
         onReleaseDragListener = listener
     }
 
@@ -68,7 +69,7 @@ internal class VerticalDragLayout @JvmOverloads constructor(
                 startY = 0f
             }
             MotionEvent.ACTION_MOVE -> {
-                if (draggingIsEnabled
+                if (isDraggingEnabled
                         && isDetectedVerticalMove == null
                         && ev.pointerCount == 1
                         && Math.abs(startY - ev.y) > touchSlop

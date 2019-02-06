@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.redmadrobot.gallery.entity.Media
 import com.redmadrobot.gallery.entity.MediaType
 import com.redmadrobot.gallery.ui.GalleryFragment
+import com.redmadrobot.gallery.ui.GalleryFragment.Companion.applyGalleryParams
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -14,18 +15,34 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_main)
 
+        val type = intent?.getSerializableExtra(EXTRA_SAMPLE_TYPE) as? SampleType
+
         recyclerView.apply {
             adapter = MediaAdapter().apply {
                 items = listOfMedia
-                onItemClick = { position ->
-                    GalleryFragment
-                            .create(listOfMedia, position)
-                            .show(supportFragmentManager, "fragment_tag_gallery")
-                }
+                onItemClick = getOnClickListener(type)
             }
             setHasFixedSize(true)
         }
     }
+
+    private fun getOnClickListener(sampleType: SampleType?) =
+            when (sampleType) {
+                SampleType.CUSTOM -> { position: Int ->
+                    CustomGalleryDialogFragment
+                            .newInstance(listOfMedia, position)
+                            .show(supportFragmentManager, "fragment_tag_custom_gallery")
+                }
+                else -> { position: Int ->
+                    GalleryFragment()
+                            .applyGalleryParams(
+                                    media = listOfMedia,
+                                    position = position,
+                                    isRotationEnabled = true
+                            )
+                            .show(supportFragmentManager, "fragment_tag_gallery")
+                }
+            }
 
     private val listOfMedia = ArrayList(listOf(
             Media(
@@ -94,4 +111,8 @@ class MainActivity : AppCompatActivity() {
                     "https://images.pexels.com/photos/248797/pexels-photo-248797.jpeg"
             )
     ))
+
+    companion object {
+        const val EXTRA_SAMPLE_TYPE = "sample_type"
+    }
 }
