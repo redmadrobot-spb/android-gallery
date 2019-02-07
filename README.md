@@ -43,16 +43,20 @@ Pass created list to `GalleryDialogFragment` with the position of image you want
 After that you can show fragment by passing `FragmentManager` and fragment tag to `show` method:
 ```kotlin
 fun onImageClick(position: Int) {
-  GalleryDialogFragment()
-              .applyGalleryParams(
-                  media = listOfMedia,
-                  position = position,
-                  isRotationEnabled = true
-              )
-                  .show(supportFragmentManager, "fragment_tag_gallery")
+  GalleryDialogFragment
+              .create(listOfMedia, position)
+              .show(supportFragmentManager, "fragment_tag_gallery")
 }
-```
-For more information just look throw the sample.
+```  
+Also you can create your own implementation of `GalleryDialogFragment`.
+Use `applyGalleryParams` extension to set custom layout, id of draggable layout, id of `ViewPager` and 
+length of swipe to dismiss dialog.  
+For example, you can change background and add toolbar to your custom implementation. 
+
+![](custom-dialog-sample-screen.png)
+
+
+For more information just look through the sample.
 ## Used libraries
 * [PhotoView](https://github.com/chrisbanes/PhotoView) for images viewing
 * [ExoPlayer](https://github.com/google/ExoPlayer) for videos playing
