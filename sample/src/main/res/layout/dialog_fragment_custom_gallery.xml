@@ -12,7 +12,7 @@
         android:layout_height="wrap_content" />
 
     <com.redmadrobot.gallery.ui.custom.VerticalDragLayout
-        android:id="@+id/ag_dragLayout"
+        android:id="@+id/customIdDragLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         >

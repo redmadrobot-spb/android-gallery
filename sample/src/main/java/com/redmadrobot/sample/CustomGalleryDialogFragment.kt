@@ -25,7 +25,10 @@ class CustomGalleryDialogFragment : GalleryDialogFragment() {
                                 media = media,
                                 position = position,
                                 layoutRes = R.layout.dialog_fragment_custom_gallery,
-                                viewPagerId = R.id.customIdViewPager
+                                viewPagerId = R.id.customIdViewPager,
+                                draggableLayoutId = R.id.customIdDragLayout,
+                                isRotationEnabled = true,
+                                swipeToDismissLengthDimen = R.dimen.default_dismiss_length
                         )
     }
 }

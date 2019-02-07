@@ -165,11 +165,11 @@ open class GalleryDialogFragment : DialogFragment() {
         fun <T : GalleryDialogFragment> T.applyGalleryParams(
                 media: ArrayList<Media>,
                 position: Int,
-                isRotationEnabled: Boolean = false,
-                @DimenRes swipeToDismissLengthDimen: Int = R.dimen.default_dismiss_length,
-                @LayoutRes layoutRes: Int = R.layout.fragment_gallery,
-                @IdRes draggableLayoutId: Int = R.id.ag_dragLayout,
-                @IdRes viewPagerId: Int = R.id.ag_viewPager
+                isRotationEnabled: Boolean,
+                @DimenRes swipeToDismissLengthDimen: Int,
+                @LayoutRes layoutRes: Int,
+                @IdRes draggableLayoutId: Int,
+                @IdRes viewPagerId: Int
         ): T {
             if (arguments == null) {
                 arguments = Bundle()
