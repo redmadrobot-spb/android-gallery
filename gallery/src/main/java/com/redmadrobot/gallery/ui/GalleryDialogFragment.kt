@@ -146,6 +146,22 @@ open class GalleryDialogFragment : DialogFragment() {
 
         @JvmOverloads
         @JvmStatic
+        fun create(
+                media: ArrayList<Media>,
+                position: Int,
+                isRotationEnabled: Boolean = false
+        ): GalleryDialogFragment =
+                GalleryDialogFragment().applyGalleryParams(
+                        media,
+                        position,
+                        isRotationEnabled,
+                        R.dimen.default_dismiss_length,
+                        R.layout.fragment_gallery,
+                        R.id.ag_dragLayout,
+                        R.id.ag_viewPager
+                )
+
+        @JvmStatic
         fun <T : GalleryDialogFragment> T.applyGalleryParams(
                 media: ArrayList<Media>,
                 position: Int,
