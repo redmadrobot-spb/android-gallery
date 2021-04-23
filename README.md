@@ -27,16 +27,14 @@ Just create list of `Media`:
 ```kotlin
 fun createGallery() {
   val listOfMedia = arrayListOf(
-            Media(
-                    thumbnailUrl = "http://mazwai.com/system/posts/videos/000/000/183/poster_3/a_sky_full_of_stars.png", 
-                    type = MediaType.VIDEO,
-                    url = "http://mazwai.com/system/posts/videos/000/000/183/original/a_sky_full_of_stars.mp4"
-            ),
-            Media(
-                    thumbnaulUrl = "https://images.pexels.com/photos/459225/pexels-photo-459225.jpeg",
-                    type = MediaType.IMAGE,
-                    url = "https://images.pexels.com/photos/459225/pexels-photo-459225.jpeg"
-            ))
+           Media.Video(
+                  "video-thumbnail-url",
+                 "video-source-url"
+           ),
+           Media.Image(
+                "image-url"
+           ),
+)
 }
 ```  
 Pass created list to `GalleryFragment` with the position of image you want to view. 
