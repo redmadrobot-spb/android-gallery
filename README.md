@@ -10,7 +10,7 @@ For proper work you need AndroidX in your project. If you are still using suppor
 Add this in your root build.gradle file: 
 ```groovy
 allprojects {
-	repositories {
+    repositories {
         maven { url "https://jitpack.io" }
     }
 }
