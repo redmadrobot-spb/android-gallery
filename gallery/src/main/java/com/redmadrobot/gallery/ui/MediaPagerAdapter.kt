@@ -1,7 +1,6 @@
 package com.redmadrobot.gallery.ui
 
 import android.content.Context
-import android.graphics.Color
 import android.net.Uri
 import android.util.SparseArray
 import android.view.View
@@ -19,7 +18,6 @@ import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory
 import com.google.android.exoplayer2.util.Util
 import com.redmadrobot.gallery.entity.Media
-import com.redmadrobot.gallery.entity.MediaType
 import com.redmadrobot.gallery.ui.custom.ExoPlayerView
 import java.util.*
 
@@ -40,9 +38,9 @@ internal class MediaPagerAdapter(
 
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
         val media = listOfMedia[position]
-        val mediaPage = when (media.type) {
-            MediaType.VIDEO -> mediaPagePool.getVideoPage().apply { this.media = media }
-            MediaType.IMAGE -> mediaPagePool.getImagePage().apply { this.media = media }
+        val mediaPage = when (media) {
+            is Media.Video -> mediaPagePool.getVideoPage().apply { this.media = media }
+            is Media.Image -> mediaPagePool.getImagePage().apply { this.media = media }
         }
         container.addView(mediaPage.view)
         mediaPagesInUse.put(position, mediaPage)
@@ -122,7 +120,8 @@ private class VideoPage(
         controllerHideOnTouch = false
         hideController()
         setControllerVisibilityListener { visibility ->
-            onPlayerControllerVisibilityListener((visibility == View.VISIBLE))
+            val isVisible = (visibility == View.VISIBLE)
+            onPlayerControllerVisibilityListener(isVisible)
         }
     }
 
@@ -130,8 +129,9 @@ private class VideoPage(
         set(value) {
             field = value
             when (value) {
-                null -> exoPlayerWrapper.pause()
-                else -> exoPlayerWrapper.setMediaSource(value.url)
+                is Media.Video -> setMediaSource(value.url)
+                null -> pause()
+                else -> releasePlayer()
             }
         }
 
@@ -142,6 +142,8 @@ private class VideoPage(
     fun hideController() = view.hideController()
 
     fun releasePlayer() = exoPlayerWrapper.release()
+
+    fun setMediaSource(url: String) = exoPlayerWrapper.setMediaSource(url)
 }
 
 private class ImagePage(
@@ -159,10 +161,14 @@ private class ImagePage(
         set(value) {
             field = value
             when (value) {
-                null -> Glide.with(view).clear(view)
-                else -> Glide.with(view).load(value.thumbnailUrl).into(view)
+                is Media.Image -> loadImage(value.url)
+                null -> cancelLoading()
+                else -> cancelLoading()
             }
         }
+
+    fun loadImage(url: String) = Glide.with(view).load(url).into(view)
+    fun cancelLoading() = Glide.with(view).clear(view)
 
     fun resetScale() {
         view.setScale(1.0F, false)

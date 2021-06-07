@@ -2,8 +2,15 @@ package com.redmadrobot.gallery.entity
 
 import java.io.Serializable
 
-data class Media(
-        val thumbnailUrl: String,
-        val type: MediaType,
-        val url: String
-) : Serializable
+sealed class  Media  :Serializable{
+
+    data class Image(
+            val url: String
+    ):Media()
+
+    data class Video(
+             val thumbnailUrl: String,
+              val url: String
+    ) : Media()
+
+}
