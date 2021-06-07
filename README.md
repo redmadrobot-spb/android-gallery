@@ -12,7 +12,6 @@ Add this in your root build.gradle file:
 allprojects {
 	repositories {
         maven { url "https://jitpack.io" }
-	maven { url "https://dl.bintray.com/rmrspb/android-maven" }
     }
 }
 ```
