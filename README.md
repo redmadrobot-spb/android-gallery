@@ -19,7 +19,7 @@ allprojects {
 
 After that add library to your module:
 ```groovy
-implementation 'com.git.gallery:android-gallery:latest.version.here'
+  implementation 'com.github.oguzhanaslann:android-gallery:<latest.version.here>'
 ```
 ## Usage
 All you need to create list of your media content is URL of each of image/video. 
