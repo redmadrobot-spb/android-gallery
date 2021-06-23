@@ -35,9 +35,13 @@ class MediaAdapter : RecyclerView.Adapter<MediaAdapter.ViewHolder>() {
                 is Media.Image -> Glide.with(itemView)
                         .load(media.url)
                         .into(itemView.previewImageView)
-                is Media.Video -> Glide.with(itemView)
-                        .load(media.thumbnailUrl)
-                        .into(itemView.previewImageView)
+                is Media.Video -> {
+                    media.thumbnailUrl.let {
+                        Glide.with(itemView)
+                            .load(it)
+                            .into(itemView.previewImageView)
+                    }
+                }
             }
 
             itemView.setOnClickListener { onItemClick(position) }

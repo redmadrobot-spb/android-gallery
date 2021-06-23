@@ -9,7 +9,7 @@ sealed class  Media  :Serializable{
     ):Media()
 
     data class Video(
-             val thumbnailUrl: String,
+              val thumbnailUrl: String? = null ,
               val url: String
     ) : Media()
 
